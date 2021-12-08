@@ -1,0 +1,57 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body {
+  font-family: "Readex Pro", sans-serif;
+}
+.container {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: aqua;
+}
+
+.game__board {
+  height: 450px;
+  width: 450px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  background-color: rgb(27, 44, 100);
+  gap: 5px;
+}
+
+.game__header {
+}
+.tile {
+  background: aqua;
+  font-size: 190px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+  height: 150px;
+  width: 150px;
+}
+
+.resetBtn {
+  font-size: 30px;
+  background: rgb(27, 44, 100);
+  color: white;
+  border: 0;
+  padding: 1rem;
+  border-radius: 20px;
+  display: block;
+}
+
+function PlayerFactory(name, logo) {
+  return {
+    name: name
+    logo: logo,
+  }
+}
+
+const james = PlayerFactory('james', 'x')
