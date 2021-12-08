@@ -21,9 +21,14 @@ body {
   grid-template-columns: repeat(3, 1fr);
   background-color: rgb(27, 44, 100);
   gap: 5px;
+  margin-bottom: 2rem;
 }
 
 .game__header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+  align-items: center;
 }
 .tile {
   background: aqua;
@@ -38,7 +43,7 @@ body {
 }
 
 .resetBtn {
-  font-size: 30px;
+  font-size: 20px;
   background: rgb(27, 44, 100);
   color: white;
   border: 0;
@@ -46,12 +51,7 @@ body {
   border-radius: 20px;
   display: block;
 }
-
-function PlayerFactory(name, logo) {
-  return {
-    name: name
-    logo: logo,
-  }
+.message {
+  font-size: 20px;
+  color: rgb(27, 44, 100);
 }
-
-const james = PlayerFactory('james', 'x')

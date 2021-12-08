@@ -1,33 +1,22 @@
-const tiles = document.querySelectorAll(".tile");
-let gameArray = ["", "", "", "", "", "", "", "", ""];
-let winner = "";
-const message = document.querySelector(".message");
-const resetBtn = document.querySelector(".resetBtn");
 let gameState = true;
+// let winner = "";
+let gameArray = ["", "", "", "", "", "", "", "", ""];
 
 function PlayerFactory(name, symbol) {
   return {
     name,
     symbol,
+    score: 0,
   };
 }
+const scorePlayerOne = document.querySelector(".scoreboard--player1");
+const scorePlayerTwo = document.querySelector(".scoreboard--player2");
+const tiles = document.querySelectorAll(".tile");
+const message = document.querySelector(".message");
+const resetBtn = document.querySelector(".resetBtn");
 const playerOne = PlayerFactory("Player One", "X");
 const playerTwo = PlayerFactory("Player Two", "O");
 let currentPlayer = playerOne;
-
-tiles.forEach((tile) => {
-  addEventListener("click", (e) => {
-    let id = e.target.id;
-    if (gameArray[id] === "") {
-      gameArray[id] = currentPlayer;
-      e.target.textContent = currentPlayer.symbol;
-      checkForWinner();
-      if (gameState === true) {
-        changePlayer();
-      }
-    }
-  });
-});
 
 function changePlayer() {
   if (currentPlayer === playerOne) {
@@ -50,6 +39,39 @@ const winningConditions = [
   [2, 4, 6],
 ];
 
+resetBtn.addEventListener("click", newGame);
+
+function declareWinner() {}
+
+function newGame() {
+  gameArray = ["", "", "", "", "", "", "", "", ""];
+  tiles.forEach((tile) => {
+    tile.textContent = "";
+  });
+  gameState = true;
+  startGame();
+  currentPlayer = playerOne;
+  message.textContent = `${currentPlayer.name}'s turn`;
+}
+
+function startGame() {
+  tiles.forEach((tile) => {
+    addEventListener("click", (e) => {
+      if (gameState === true) {
+        let id = e.target.id;
+        if (gameArray[id] === "") {
+          gameArray[id] = currentPlayer.symbol;
+          e.target.textContent = currentPlayer.symbol;
+          checkForWinner();
+          if (gameState === true) {
+            changePlayer();
+          }
+        }
+      }
+    });
+  });
+}
+
 function checkForWinner() {
   for (let i = 0; i < winningConditions.length; i++) {
     const winCondition = winningConditions[i];
@@ -60,25 +82,18 @@ function checkForWinner() {
       continue;
     }
     if (a === b && b === c) {
-      winner = currentPlayer;
-      break;
+      let winner = currentPlayer.name;
+      message.textContent = `${winner} WINS!!`;
+      currentPlayer.score += 1;
+      scorePlayerOne.textContent = `Player 1: Score: ${playerOne.score}`;
+      scorePlayerTwo.textContent = `Player 2: Score: ${playerTwo.score}`;
+      gameState = false;
+    }
+    if (gameArray.includes("") === false) {
+      message.textContent = `it's a tie!`;
+      gameState = false;
     }
   }
-  if (winner !== "") {
-    declareWinner();
-    gameState = false;
-    console.log(`${currentPlayer.name} is the winner`);
-  }
 }
 
-resetBtn.addEventListener("click", newGame);
-
-function delcareWinner() {}
-function newGame() {
-  gameArray = ["", "", "", "", "", "", "", "", ""];
-  tiles.forEach((tile) => {
-    tile.textContent = "";
-  });
-  currentPlayer = playerOne;
-  message.textContent = `${currentPlayer.name}'s turn'`;
-}
+startGame();
