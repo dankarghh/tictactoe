@@ -85,8 +85,8 @@ function checkForWinner() {
       let winner = currentPlayer.name;
       message.textContent = `${winner} WINS!!`;
       currentPlayer.score += 1;
-      scorePlayerOne.textContent = `Player 1: Score: ${playerOne.score}`;
-      scorePlayerTwo.textContent = `Player 2: Score: ${playerTwo.score}`;
+      scorePlayerOne.textContent = `Player 1 score: ${playerOne.score}`;
+      scorePlayerTwo.textContent = `Player 2 score: ${playerTwo.score}`;
       gameState = false;
     }
     if (gameArray.includes("") === false) {
