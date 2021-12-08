@@ -88,6 +88,9 @@ function checkForWinner() {
       scorePlayerOne.textContent = `Player 1 score: ${playerOne.score}`;
       scorePlayerTwo.textContent = `Player 2 score: ${playerTwo.score}`;
       gameState = false;
+      {
+        break;
+      }
     }
     if (gameArray.includes("") === false) {
       message.textContent = `it's a tie!`;
